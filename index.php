@@ -1,10 +1,23 @@
+<?php
+// Mostrar errores durante el desarrollo
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+// Configuración general
+$titulo = "Asociación de Desarrollo Integral Nuestro Amo";
+$hoy = date("d/m/Y H:i:s");
+
+// Conexión a la base de datos
+require_once("includes/conexion.php");
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ADNA - Asociación de Desarrollo Integral Nuestro Amo</title>
+    <title><?php echo $titulo; ?></title>
 
     <link rel="stylesheet" href="css/style.css">
 
@@ -14,10 +27,14 @@
 
 <body>
 
-    <!-- HEADER  -->
+    <!-- Barra informativa -->
+    <div style="background:#28a745;color:white;text-align:center;padding:10px;font-family:Poppins,sans-serif;font-weight:600;">
+        Sistema ADNA en ejecución | Fecha del servidor:
+        <?php echo $hoy; ?>
+    </div>
 
+    <!-- HEADER -->
     <header>
-
         <nav class="navbar">
 
             <div class="logo">
@@ -30,14 +47,20 @@
                 <li><a href="#servicios">Servicios</a></li>
                 <li><a href="#actividades">Actividades</a></li>
                 <li><a href="#contacto">Contacto</a></li>
-                <li><a href="login.html" class="btn-login">Iniciar Sesión</a></li>
+
+                <!-- ESTE SERÁ EL LOGIN -->
+                <li>
+                    <a href="login.php" class="btn-login">
+                        Iniciar Sesión
+                    </a>
+                </li>
+
             </ul>
 
         </nav>
-
     </header>
 
-    <!--  HERO  -->
+    <!-- HERO -->
     <section class="hero">
 
         <div class="hero-text">
@@ -49,31 +72,29 @@
                 servicios comunitarios y mejorar la comunicación con los vecinos.
             </p>
 
-            <a href="#servicios" class="btn">Conocer más</a>
+            <a href="#servicios" class="btn">
+                Conocer más
+            </a>
 
         </div>
 
     </section>
 
-    <!--  NOSOTROS  -->
-
+    <!-- NOSOTROS -->
     <section id="nosotros" class="contenedor">
 
         <h2>¿Quiénes Somos?</h2>
 
         <p>
-
             La Asociación de Desarrollo Integral Nuestro Amo trabaja en beneficio
             de la comunidad mediante la organización de actividades,
             administración de instalaciones comunales y desarrollo de proyectos
             sociales que contribuyen al bienestar de los vecinos.
-
         </p>
 
     </section>
 
-    <!--  SERVICIOS  -->
-
+    <!-- SERVICIOS -->
     <section id="servicios" class="servicios">
 
         <h2>Nuestros Servicios</h2>
@@ -81,51 +102,30 @@
         <div class="cards">
 
             <div class="card">
-
                 <h3>Reserva del Salón Comunal</h3>
-
-                <p>
-                    Solicite el uso de las instalaciones de forma rápida y sencilla.
-                </p>
-
+                <p>Solicite el uso de las instalaciones de forma rápida y sencilla.</p>
             </div>
 
             <div class="card">
-
                 <h3>Actividades Comunitarias</h3>
-
-                <p>
-                    Consulte los eventos y actividades organizadas por la asociación.
-                </p>
-
+                <p>Consulte los eventos y actividades organizadas por la asociación.</p>
             </div>
 
             <div class="card">
-
                 <h3>Noticias</h3>
-
-                <p>
-                    Manténgase informado sobre los proyectos y anuncios importantes.
-                </p>
-
+                <p>Manténgase informado sobre los proyectos y anuncios importantes.</p>
             </div>
 
             <div class="card">
-
                 <h3>Registro de Vecinos</h3>
-
-                <p>
-                    Administración segura de la información de los miembros de la comunidad.
-                </p>
-
+                <p>Administración segura de la información de los miembros de la comunidad.</p>
             </div>
 
         </div>
 
     </section>
 
-    <!-- ACTIVIDADES  -->
-
+    <!-- ACTIVIDADES -->
     <section id="actividades" class="contenedor">
 
         <h2>Próximas Actividades</h2>
@@ -135,11 +135,9 @@
             <thead>
 
                 <tr>
-
                     <th>Actividad</th>
                     <th>Fecha</th>
                     <th>Lugar</th>
-
                 </tr>
 
             </thead>
@@ -147,27 +145,21 @@
             <tbody>
 
                 <tr>
-
                     <td>Asamblea General</td>
                     <td>15 de Julio</td>
                     <td>Salón Comunal</td>
-
                 </tr>
 
                 <tr>
-
                     <td>Campaña de Limpieza</td>
                     <td>22 de Julio</td>
                     <td>Parque Central</td>
-
                 </tr>
 
                 <tr>
-
                     <td>Feria Comunitaria</td>
                     <td>05 de Agosto</td>
                     <td>Cancha Multiuso</td>
-
                 </tr>
 
             </tbody>
@@ -176,29 +168,26 @@
 
     </section>
 
-    <!--  CONTACTO  -->
-
+    <!-- CONTACTO -->
     <section id="contacto" class="contacto">
 
         <h2>Contáctenos</h2>
 
-        <p>Email: contacto@adna.cr</p>
+        <p>Email: ADNA1954@adna.cr</p>
 
-        <p>Teléfono: 0000-0000</p>
+        <p>Teléfono: 7967-3457</p>
 
         <p>Guácima, Alajuela, Costa Rica.</p>
 
     </section>
 
-    <!-- FOOTER  -->
-
+    <!-- FOOTER -->
     <footer>
 
         <p>
-
-            © 2026 Asociación de Desarrollo Integral Nuestro Amo.
+            © <?php echo date("Y"); ?>
+            Asociación de Desarrollo Integral Nuestro Amo.
             Todos los derechos reservados.
-
         </p>
 
     </footer>
