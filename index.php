@@ -8,7 +8,7 @@ $titulo = "Asociación de Desarrollo Integral Nuestro Amo";
 $hoy = date("d/m/Y H:i:s");
 
 // Conexión a la base de datos
-require_once("includes/conexion.php");
+require_once("config/database.php");
 ?>
 
 <!DOCTYPE html>
