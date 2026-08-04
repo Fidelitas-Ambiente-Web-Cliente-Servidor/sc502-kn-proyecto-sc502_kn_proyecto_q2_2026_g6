@@ -1,83 +1,170 @@
 <?php
+
+
 session_start();
 
-// Si el usuario ya inició sesión, redirigir al Dashboard
-if (isset($_SESSION["id_usuario"])) {
-    header("Location: admin/dashboard.php");
-    exit();
+
+
+require_once(__DIR__ . "/../controllers/UserController.php");
+
+
+
+$mensaje = "";
+
+
+
+if(isset($_POST["ingresar"]))
+{
+
+
+    $correo = $_POST["correo"];
+
+
+    $contrasena = $_POST["contrasena"];
+
+
+
+
+    $controller = new UserController();
+
+
+
+    $usuario = $controller->login($correo,$contrasena);
+
+
+
+    if($usuario)
+    {
+
+
+        $_SESSION["usuario"] = $usuario;
+
+
+
+        header("Location: ../dashboard.php");
+
+
+        exit();
+
+
+
+    }
+    else
+    {
+
+
+        $mensaje = "Usuario o contraseña incorrectos";
+
+
+    }
+
+
+
 }
+
+
 ?>
 
+
+
 <!DOCTYPE html>
+
 <html lang="es">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar Sesión | ADNA</title>
 
-    <link rel="stylesheet" href="../css/login.css">
+<head>
+
+<meta charset="UTF-8">
+
+<title>Login ADNA</title>
+
+
+<link rel="stylesheet" href="../css/style.css">
+
+
 </head>
+
 
 <body>
 
+
+
 <div class="login-container">
 
-    <div class="login-box">
 
-        <h1>ADNA</h1>
+<div class="login-box">
 
-        <h2>Asociación de Desarrollo Integral Nuestro Amo</h2>
 
-        <p>Ingrese sus credenciales para acceder al sistema.</p>
 
-       <form action="./includes/validar_login.php" method="POST">
+<h1>ADNA</h1>
 
-            <div class="campo">
 
-                <label>Correo electrónico</label>
+<h2>Inicio de Sesión</h2>
 
-                <input
-                    type="email"
-                    name="correo"
-                    placeholder="correo@ejemplo.com"
-                    required>
 
-            </div>
 
-            <div class="campo">
+<?php if($mensaje != ""){ ?>
 
-                <label>Contraseña</label>
+<p class="error">
 
-                <input
-                    type="password"
-                    name="contrasena"
-                    placeholder="********"
-                    required>
+<?php echo $mensaje; ?>
 
-            </div>
+</p>
 
-            <button type="submit">
-                Iniciar Sesión
-            </button>
+<?php } ?>
 
-        </form>
 
-        <?php
-        if(isset($_GET["error"])){
-            echo "<p class='error'>Correo o contraseña incorrectos.</p>";
-        }
-        ?>
 
-        <hr>
+<form method="POST">
 
-        <a class="volver" href="index.php">
-            ← Volver al sitio principal
-        </a>
 
-    </div>
+
+<label>
+Correo:
+</label>
+
+
+<input 
+type="email"
+name="correo"
+required>
+
+
+
+<label>
+Contraseña:
+</label>
+
+
+<input 
+type="password"
+name="contrasena"
+required>
+
+
+
+<button 
+type="submit"
+name="ingresar">
+
+Ingresar
+
+</button>
+
+
+
+</form>
+
+
 
 </div>
 
+
+</div>
+
+
+
 </body>
+
+
 </html>

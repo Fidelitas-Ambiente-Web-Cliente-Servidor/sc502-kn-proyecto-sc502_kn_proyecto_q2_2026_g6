@@ -1,14 +1,15 @@
 <?php
-// Mostrar errores durante el desarrollo
+
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-// Configuración general
-$titulo = "Asociación de Desarrollo Integral Nuestro Amo";
-$hoy = date("d/m/Y H:i:s");
 
-// Conexión a la base de datos
+$titulo = "Asociación de Desarrollo Integral Nuestro Amo";
+
+
 require_once("config/database.php");
+
+
 ?>
 
 <!DOCTYPE html>
@@ -27,100 +28,249 @@ require_once("config/database.php");
 
 <body>
 
-    <!-- Barra informativa -->
-    <div style="background:#28a745;color:white;text-align:center;padding:10px;font-family:Poppins,sans-serif;font-weight:600;">
-        Sistema ADNA en ejecución | Fecha del servidor:
-        <?php echo $hoy; ?>
+    
     </div>
 
     <!-- HEADER -->
-    <header>
-        <nav class="navbar">
+   <header>
 
-            <div class="logo">
-                <h2>ADNA</h2>
-            </div>
+    <nav class="navbar">
 
-            <ul class="menu">
-                <li><a href="#">Inicio</a></li>
-                <li><a href="#nosotros">Nosotros</a></li>
-                <li><a href="#servicios">Servicios</a></li>
-                <li><a href="#actividades">Actividades</a></li>
-                <li><a href="#contacto">Contacto</a></li>
 
-                <!-- ESTE SERÁ EL LOGIN -->
-                <li>
-                    <a href="views/login.php" class="btn-login">
-                        Iniciar Sesión
-                    </a>
-                </li>
+        <div class="logo">
 
-            </ul>
-
-        </nav>
-    </header>
-
-    <!-- HERO -->
-    <section class="hero">
-
-        <div class="hero-text">
-
-            <h1>Asociación de Desarrollo Integral Nuestro Amo</h1>
-
-            <p>
-                Plataforma web diseñada para facilitar la administración de los
-                servicios comunitarios y mejorar la comunicación con los vecinos.
-            </p>
-
-            <a href="#servicios" class="btn">
-                Conocer más
-            </a>
+            <img src="c:\Users\Usuario\OneDrive\Escritorio\ADNA-Web nueva\Img\logo.png" alt="Logo ADNA">
 
         </div>
+
+
+
+        <ul class="menu">
+
+
+            <li>
+                <a href="#">
+                    Inicio
+                </a>
+            </li>
+
+
+            <li>
+                <a href="#nosotros">
+                    Nosotros
+                </a>
+            </li>
+
+
+            <li>
+                <a href="#servicios">
+                    Servicios
+                </a>
+            </li>
+
+
+            <li>
+                <a href="#actividades">
+                    Actividades
+                </a>
+            </li>
+
+
+            <li>
+                <a href="#contacto">
+                    Contacto
+                </a>
+            </li>
+
+
+            <li>
+
+                <a href="views/login.php" class="btn-login">
+
+                    Iniciar Sesión
+
+                </a>
+
+            </li>
+
+
+
+        </ul>
+
+
+    </nav>
+
+
+</header>
+
+    <!-- HERO -->
+   <section class="hero">
+
+
+    <div class="hero-overlay">
+
+
+        <section class="hero">
+
+
+    <div class="hero-content">
+
+
+        <h1>
+            Asociación de Desarrollo Integral Nuestro Amo
+        </h1>
+
+
+        <h2>
+            Sistema de Gestión Comunitaria ADNA
+        </h2>
+
+
+        <p>
+            Una plataforma digital para fortalecer la organización,
+            administración y comunicación de nuestra comunidad.
+        </p>
+
+
+        <a href="#nosotros" class="btn-more">
+            Conocer más
+        </a>
+
+
+    </div>
+
+
+</section>
+
 
     </section>
 
     <!-- NOSOTROS -->
-    <section id="nosotros" class="contenedor">
+    <section id="nosotros" class="nosotros">
 
-        <h2>¿Quiénes Somos?</h2>
+
+    <div class="nosotros-imagen">
+
+        <img src="img/adna.jpg" alt="Asociación de Desarrollo Integral Nuestro Amo">
+
+    </div>
+
+
+
+    <div class="nosotros-texto">
+
+
+        <h2>
+            ¿Quiénes Somos?
+        </h2>
+
 
         <p>
-            La Asociación de Desarrollo Integral Nuestro Amo trabaja en beneficio
-            de la comunidad mediante la organización de actividades,
-            administración de instalaciones comunales y desarrollo de proyectos
-            sociales que contribuyen al bienestar de los vecinos.
+            La Asociación de Desarrollo Integral Nuestro Amo (ADNA) fue fundada
+            en el año 1985 con el propósito de impulsar el bienestar, la organización
+            y el desarrollo integral de nuestra comunidad.
         </p>
+
+
+        <p>
+            Desde sus inicios, gracias al compromiso de sus líderes comunales
+            y la participación activa de los vecinos, la Asociación ha desarrollado
+            proyectos sociales, deportivos, recreativos y de infraestructura
+            que han contribuido al crecimiento y fortalecimiento de la comunidad.
+        </p>
+
+
+        <p>
+            Actualmente, ADNA continúa trabajando con compromiso y responsabilidad
+            para promover una comunidad más unida, participativa y con mayores
+            oportunidades para las presentes y futuras generaciones.
+        </p>
+
+
+        <a href="#servicios" class="btn-more">
+            Conocer nuestros servicios
+        </a>
+
+
+    </div>
+
+
+</section>
 
     </section>
 
     <!-- SERVICIOS -->
     <section id="servicios" class="servicios">
 
-        <h2>Nuestros Servicios</h2>
+    <h2>Gestión Comunitaria</h2>
 
-        <div class="cards">
+    <p class="descripcion-servicios">
+        El Sistema ADNA permite administrar de manera organizada
+        los servicios y recursos comunitarios, facilitando la gestión
+        interna de la asociación y la atención a los vecinos.
+    </p>
 
-            <div class="card">
-                <h3>Reserva del Salón Comunal</h3>
-                <p>Solicite el uso de las instalaciones de forma rápida y sencilla.</p>
-            </div>
 
-            <div class="card">
-                <h3>Actividades Comunitarias</h3>
-                <p>Consulte los eventos y actividades organizadas por la asociación.</p>
-            </div>
+    <div class="cards">
 
-            <div class="card">
-                <h3>Noticias</h3>
-                <p>Manténgase informado sobre los proyectos y anuncios importantes.</p>
-            </div>
 
-            <div class="card">
-                <h3>Registro de Vecinos</h3>
-                <p>Administración segura de la información de los miembros de la comunidad.</p>
-            </div>
+        <div class="card">
 
+            <h3>Gestión de Reservas</h3>
+
+            <p>
+                Administración de solicitudes para el uso del salón comunal,
+                controlando fechas, disponibilidad y aprobación de espacios.
+            </p>
+
+        </div>
+
+
+
+        <div class="card">
+
+            <h3>Actividades Comunitarias</h3>
+
+            <p>
+                Organización y seguimiento de actividades sociales,
+                culturales y proyectos dirigidos al bienestar de la comunidad.
+            </p>
+
+        </div>
+
+
+
+
+        <div class="card">
+
+            <h3>Comunicación Institucional</h3>
+
+            <p>
+                Publicación de noticias, avisos y comunicados importantes
+                para mantener informados a los habitantes de la comunidad.
+            </p>
+
+        </div>
+
+
+
+
+        <div class="card">
+
+            <h3>Administración de Vecinos</h3>
+
+            <p>
+                Registro y gestión de información de los miembros de la comunidad
+                mediante un sistema seguro y organizado.
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+</section>
         </div>
 
     </section>
@@ -171,15 +321,15 @@ require_once("config/database.php");
     <!-- CONTACTO -->
     <section id="contacto" class="contacto">
 
-        <h2>Contáctenos</h2>
+    <h2>Contáctenos</h2>
 
-        <p>Email: ADNA1954@adna.cr</p>
+    <p>Email: ADNA1954@adna.cr</p>
 
-        <p>Teléfono: 7967-3457</p>
+    <p>Teléfono: 7967-3457</p>
 
-        <p>Guácima, Alajuela, Costa Rica.</p>
+    <p>Guácima, Alajuela, Costa Rica.</p>
 
-    </section>
+</section>
 
     <!-- FOOTER -->
     <footer>

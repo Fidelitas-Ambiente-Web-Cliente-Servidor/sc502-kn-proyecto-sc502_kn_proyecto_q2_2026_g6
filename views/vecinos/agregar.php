@@ -1,121 +1,301 @@
 <?php
-session_start();
 
-if (!isset($_SESSION["id_usuario"])) {
-    header("Location: ../../login.php");
+require_once("../models/Vecino.php");
+
+
+$modelo = new Vecino();
+
+
+
+if(isset($_POST["guardar"])) {
+
+
+
+    $datos = [
+
+
+        "nombre" => $_POST["nombre"],
+
+
+        "apellido" => $_POST["apellido"],
+
+
+        "cedula" => $_POST["cedula"],
+
+
+        "telefono" => $_POST["telefono"],
+
+
+        "correo" => $_POST["correo"],
+
+
+        "direccion" => $_POST["direccion"],
+
+
+        "id_estado" => $_POST["id_estado"]
+
+
+    ];
+
+
+
+    $modelo->agregar($datos);
+
+
+
+    header("Location: listar.php");
+
+
     exit();
-}
-
-require_once("../../includes/conexion.php");
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-    $nombre = trim($_POST["nombre"]);
-    $apellido = trim($_POST["apellido"]);
-    $cedula = trim($_POST["cedula"]);
-    $telefono = trim($_POST["telefono"]);
-    $correo = trim($_POST["correo"]);
-    $direccion = trim($_POST["direccion"]);
-
-    $sql = "INSERT INTO vecino
-    (nombre, apellido, cedula, telefono, correo, direccion, id_estado)
-    VALUES (?, ?, ?, ?, ?, ?, 1)";
-
-    $stmt = $conn->prepare($sql);
-
-    $stmt->bind_param(
-        "ssssss",
-        $nombre,
-        $apellido,
-        $cedula,
-        $telefono,
-        $correo,
-        $direccion
-    );
-
-    if ($stmt->execute()) {
-
-        header("Location: listar.php");
-
-        exit();
-
-    } else {
-
-        $error = "No fue posible registrar el vecino.";
-
-    }
 
 }
 
-include("../../layouts/header.php");
-include("../../layouts/sidebar.php");
+
+
 ?>
 
-<h1>Registrar Vecino</h1>
 
-<?php
-if(isset($error)){
-    echo "<p style='color:red;'>$error</p>";
-}
-?>
+
+<!DOCTYPE html>
+<html lang="es">
+
+
+<head>
+
+<meta charset="UTF-8">
+
+
+<title>Agregar Vecino | ADNA</title>
+
+
+<link rel="stylesheet" href="../css/style.css">
+
+
+</head>
+
+
+
+<body>
+
+
+
+<?php include("../includes/header.php"); ?>
+
+
+
+<div class="dashboard-content">
+
+
+
+<h1>
+Registrar Vecino
+</h1>
+
+
+
+
+<section class="info">
+
+
 
 <form method="POST">
 
-    <label>Nombre</label>
 
-    <input
-        type="text"
-        name="nombre"
-        required>
 
-    <label>Apellido</label>
 
-    <input
-        type="text"
-        name="apellido"
-        required>
 
-    <label>Cédula</label>
+<label>
+Nombre
+</label>
 
-    <input
-        type="text"
-        name="cedula"
-        required>
+<br>
 
-    <label>Teléfono</label>
 
-    <input
-        type="text"
-        name="telefono">
+<input 
+type="text"
+name="nombre"
+placeholder="Nombre del vecino"
+required>
 
-    <label>Correo</label>
 
-    <input
-        type="email"
-        name="correo">
 
-    <label>Dirección</label>
 
-    <textarea
-        name="direccion"
-        rows="4"></textarea>
+<br><br>
 
-    <br><br>
 
-    <button class="btn-agregar">
 
-        Guardar Vecino
 
-    </button>
 
-    <a href="listar.php">
+<label>
+Apellido
+</label>
 
-        Cancelar
+<br>
 
-    </a>
+
+<input 
+type="text"
+name="apellido"
+placeholder="Apellido del vecino"
+required>
+
+
+
+
+<br><br>
+
+
+
+
+
+<label>
+Cédula
+</label>
+
+<br>
+
+
+<input 
+type="text"
+name="cedula"
+placeholder="Número de cédula"
+required>
+
+
+
+
+<br><br>
+
+
+
+
+
+<label>
+Teléfono
+</label>
+
+<br>
+
+
+<input 
+type="text"
+name="telefono"
+placeholder="8888-8888">
+
+
+
+
+<br><br>
+
+
+
+
+
+<label>
+Correo electrónico
+</label>
+
+<br>
+
+
+<input 
+type="email"
+name="correo"
+placeholder="correo@gmail.com">
+
+
+
+
+<br><br>
+
+
+
+
+
+<label>
+Dirección
+</label>
+
+<br>
+
+
+<textarea 
+name="direccion"
+placeholder="Dirección del vecino"></textarea>
+
+
+
+
+<br><br>
+
+
+
+
+
+<label>
+Estado
+</label>
+
+<br>
+
+
+
+<select name="id_estado">
+
+
+
+<option value="1">
+Activo
+</option>
+
+
+
+<option value="2">
+Inactivo
+</option>
+
+
+
+</select>
+
+
+
+
+<br><br>
+
+
+
+
+
+<button 
+type="submit"
+name="guardar"
+class="btn-more">
+
+Guardar Vecino
+
+</button>
+
+
 
 </form>
 
-<?php
-include("../../layouts/footer.php");
-?>
+
+
+</section>
+
+
+
+</div>
+
+
+
+
+<?php include("../includes/footer.php"); ?>
+
+
+
+</body>
+
+
+</html>

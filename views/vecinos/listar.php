@@ -1,75 +1,260 @@
 <?php
-session_start();
 
-if (!isset($_SESSION["id_usuario"])) {
-    header("Location: ../../login.php");
-    exit();
-}
+require_once("../models/Vecino.php");
 
-require_once("../../includes/conexion.php");
 
-$sql = "SELECT * FROM vecino ORDER BY apellido, nombre";
-$resultado = $conn->query($sql);
+$modelo = new Vecino();
 
-include("../../layouts/header.php");
-include("../../layouts/sidebar.php");
+
+
+$vecinos = $modelo->listar();
+
+
+
 ?>
 
-<h1>Gestión de Vecinos</h1>
 
-<p>
-    <a href="agregar.php" class="btn-agregar">
-        + Registrar vecino
-    </a>
-</p>
+<!DOCTYPE html>
+<html lang="es">
 
-<table class="tabla">
 
-    <thead>
+<head>
 
-        <tr>
-            <th>ID</th>
-            <th>Cédula</th>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Teléfono</th>
-            <th>Correo</th>
-            <th>Acciones</th>
-        </tr>
+<meta charset="UTF-8">
 
-    </thead>
 
-    <tbody>
+<title>Vecinos | ADNA</title>
 
-    <?php while($fila = $resultado->fetch_assoc()){ ?>
 
-        <tr>
+<link rel="stylesheet" href="../css/style.css">
 
-            <td><?= $fila["id_vecino"] ?></td>
 
-            <td><?= htmlspecialchars($fila["cedula"]) ?></td>
+</head>
 
-            <td><?= htmlspecialchars($fila["nombre"]) ?></td>
 
-            <td><?= htmlspecialchars($fila["apellido"]) ?></td>
 
-            <td><?= htmlspecialchars($fila["telefono"]) ?></td>
+<body>
 
-            <td><?= htmlspecialchars($fila["correo"]) ?></td>
 
-            <td>
-                <a href="editar.php?id=<?= $fila["id_vecino"] ?>">Editar</a> |
-                <a href="eliminar.php?id=<?= $fila["id_vecino"] ?>" onclick="return confirm('¿Desea eliminar este vecino?');">Eliminar</a>
-            </td>
 
-        </tr>
+<?php include("../includes/header.php"); ?>
 
-    <?php } ?>
 
-    </tbody>
+
+<div class="dashboard-content">
+
+
+
+<h1>
+Administración de Vecinos
+</h1>
+
+
+
+<a href="agregar.php" class="btn-more">
+
+➕ Nuevo Vecino
+
+</a>
+
+
+
+<br><br>
+
+
+
+
+<section class="info">
+
+
+
+<h2>
+Lista de Vecinos Registrados
+</h2>
+
+
+
+<table>
+
+
+
+<thead>
+
+<tr>
+
+<th>
+Nombre
+</th>
+
+
+<th>
+Apellido
+</th>
+
+
+<th>
+Cédula
+</th>
+
+
+<th>
+Teléfono
+</th>
+
+
+<th>
+Correo
+</th>
+
+
+<th>
+Dirección
+</th>
+
+
+<th>
+Estado
+</th>
+
+
+<th>
+Acciones
+</th>
+
+
+</tr>
+
+
+</thead>
+
+
+
+<tbody>
+
+
+
+<?php foreach($vecinos as $vecino){ ?>
+
+
+<tr>
+
+
+
+<td>
+
+<?php echo $vecino["nombre"]; ?>
+
+</td>
+
+
+
+<td>
+
+<?php echo $vecino["apellido"]; ?>
+
+</td>
+
+
+
+<td>
+
+<?php echo $vecino["cedula"]; ?>
+
+</td>
+
+
+
+<td>
+
+<?php echo $vecino["telefono"]; ?>
+
+</td>
+
+
+
+<td>
+
+<?php echo $vecino["correo"]; ?>
+
+</td>
+
+
+
+<td>
+
+<?php echo $vecino["direccion"]; ?>
+
+</td>
+
+
+
+<td>
+
+<?php echo $vecino["estado"]; ?>
+
+</td>
+
+
+
+<td>
+
+
+
+<a href="editar.php?id=<?php echo $vecino['id_vecino']; ?>">
+
+✏️ Editar
+
+</a>
+
+
+
+<br><br>
+
+
+
+<a 
+href="eliminar.php?id=<?php echo $vecino['id_vecino']; ?>"
+onclick="return confirm('¿Desea eliminar este vecino?');">
+
+🗑️ Eliminar
+
+</a>
+
+
+
+</td>
+
+
+</tr>
+
+
+
+<?php } ?>
+
+
+
+</tbody>
+
+
 
 </table>
 
-<?php
-include("../../layouts/footer.php");
-?>
+
+
+</section>
+
+
+
+</div>
+
+
+
+
+<?php include("../includes/footer.php"); ?>
+
+
+
+</body>
+
+
+</html>

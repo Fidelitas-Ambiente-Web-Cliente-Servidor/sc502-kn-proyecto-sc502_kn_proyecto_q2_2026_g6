@@ -1,20 +1,59 @@
 <?php
-class Database
-{
-    private string $host = "db";
-    private string $db   = "AsociacionDB";
-    private string $user = "root";
-    private string $pass = "root";
 
-    public function connect(): PDO
-    {
-        $dsn = "mysql:host={$this->host};dbname={$this->db};charset=utf8mb4";
 
-        $pdo = new PDO($dsn, $this->user, $this->pass, [
-            PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-        ]);
+class Database{
 
-        return $pdo;
+
+    private $host = "db";
+    private $usuario = "appuser";
+    private $password = "apppass";
+    private $baseDatos = "appdb";
+
+
+    public function getConnection(){
+
+
+        try{
+
+
+            $conexion = new PDO(
+
+                "mysql:host=".$this->host.";dbname=".$this->baseDatos.";charset=utf8",
+
+                $this->usuario,
+
+                $this->password
+
+            );
+
+
+
+            $conexion->setAttribute(
+
+                PDO::ATTR_ERRMODE,
+
+                PDO::ERRMODE_EXCEPTION
+
+            );
+
+
+
+            return $conexion;
+
+
+
+        }catch(PDOException $e){
+
+
+            die("Error de conexión: ".$e->getMessage());
+
+
+        }
+
+
     }
+
+
 }
+
+?>
