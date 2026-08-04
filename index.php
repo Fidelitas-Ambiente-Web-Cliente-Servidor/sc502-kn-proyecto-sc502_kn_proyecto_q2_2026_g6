@@ -50,7 +50,7 @@ require_once("config/database.php");
 
                 <!-- ESTE SERÁ EL LOGIN -->
                 <li>
-                    <a href="login.php" class="btn-login">
+                    <a href="views/login.php" class="btn-login">
                         Iniciar Sesión
                     </a>
                 </li>
