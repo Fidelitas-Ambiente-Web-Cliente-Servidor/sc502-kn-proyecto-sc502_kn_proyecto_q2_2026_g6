@@ -1,61 +1,42 @@
 <?php
 
-require_once(__DIR__ . "/../config/database.php");
+require_once __DIR__ . '/../config/Database.php';
 
+class User
+{
+    private $conn;
+    private $table_name = "usuario";
 
-class User{
-
-
-    private $conexion;
-
-
-
-    public function __construct(){
-
-
+    public function __construct()
+    {
         $database = new Database();
-
-
-        $this->conexion = $database->conectar();
-
-
+        $this->conn = $database->connect();
     }
 
+    public function login($correo, $contrasena)
+    {
+        $query = "SELECT * FROM {$this->table_name}
+                  WHERE correo = :correo
+                  LIMIT 1";
 
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(":correo", $correo);
+        $stmt->execute();
 
-    public function login($correo,$contrasena){
+        if ($stmt->rowCount() == 1) {
 
+            $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        $sql = "SELECT *
-                FROM usuario
-                WHERE correo = ?
-                AND contrasena = ?
-                AND id_estado = 1";
+            // Contraseña en texto plano o hash
+            if (
+                $usuario["contrasena"] === $contrasena ||
+                password_verify($contrasena, $usuario["contrasena"])
+            ) {
+                return $usuario;
+            }
+        }
 
-
-
-        $consulta = $this->conexion->prepare($sql);
-
-
-
-        $consulta->execute([
-
-            $correo,
-
-            $contrasena
-
-        ]);
-
-
-
-        return $consulta->fetch(PDO::FETCH_ASSOC);
-
-
-
+        return false;
     }
-
-
-
 }
-
 ?>
